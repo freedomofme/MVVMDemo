@@ -1,4 +1,4 @@
 package com.learn.base.service;
 
-public class INetWorkService {
+public interface INetWorkService {
 }
