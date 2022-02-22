@@ -11,6 +11,6 @@ import dagger.Component;
 
 @MainScope
 @Component(dependencies = {BaseComponent.class}, modules = {MainModule.class})
-interface Main2Component {
+public interface MainComponent {
     void inject(CatsListViewModel catsListViewModel);
 }

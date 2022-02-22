@@ -1,12 +1,11 @@
-package com.learn.mvvmdemo;
+package com.learn.mvvmdemo.repository;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.learn.base.service.DatabaseService;
-import com.learn.base.service.NetworkService;
 import com.learn.mvvmdemo.api.CatsListService;
 import com.learn.mvvmdemo.bean.CatsBean;
 
@@ -33,12 +32,13 @@ public class CatsListRepository {
 
 
             @Override
-            public void onResponse(Call<List<CatsBean>> call, Response<List<CatsBean>> response) {
+            public void onResponse(@NonNull Call<List<CatsBean>> call, @NonNull Response<List<CatsBean>> response) {
                 catsBeanLiveData.setValue(response.body());
+                Log.d("dd", response.body().toString());
             }
 
             @Override
-            public void onFailure(Call<List<CatsBean>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<CatsBean>> call, @NonNull Throwable t) {
 
             }
         });
