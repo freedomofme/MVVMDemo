@@ -2,6 +2,7 @@ package com.learn.mvvmdemo;
 
 import android.app.Application;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.learn.base.di.BaseComponentProvider;
 import com.learn.base.di.component.BaseComponent;
 import com.learn.base.di.component.DaggerBaseComponent;
@@ -18,6 +19,13 @@ public class MyApplication extends Application implements BaseComponentProvider 
     @Override
     public void onCreate() {
         super.onCreate();
+        if (BuildConfig.DEBUG){
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
+        ARouter.init(this);
+
+
         initBaseComponent();
     }
 

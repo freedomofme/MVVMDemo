@@ -30,7 +30,6 @@ public class CatsListRepository {
     public void getCatsList(MutableLiveData<List<CatsBean>> catsBeanLiveData) {
         catsListService.getCatsList(0, 10).enqueue(new Callback<List<CatsBean>>() {
 
-
             @Override
             public void onResponse(@NonNull Call<List<CatsBean>> call, @NonNull Response<List<CatsBean>> response) {
                 catsBeanLiveData.setValue(response.body());

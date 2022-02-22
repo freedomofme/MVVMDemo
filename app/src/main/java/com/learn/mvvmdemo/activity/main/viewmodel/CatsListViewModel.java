@@ -16,17 +16,19 @@ public class CatsListViewModel extends ViewModel {
     @Inject
     CatsListRepository catsListRepository;
 
-    private MutableLiveData<List<CatsBean>> catsBeanLiveData;
+    private MutableLiveData<List<CatsBean>> _catsBeanLiveData;
+    public LiveData<List<CatsBean>> catsBeanLiveData;
 
     public CatsListViewModel() {
 
     }
 
     public LiveData<List<CatsBean>> getCats() {
-        if (catsBeanLiveData == null) {
-            catsBeanLiveData = new MutableLiveData<>();
+        if (_catsBeanLiveData == null) {
+            _catsBeanLiveData = new MutableLiveData<>();
+            catsBeanLiveData = _catsBeanLiveData;
         }
-        catsListRepository.getCatsList(catsBeanLiveData);
+        catsListRepository.getCatsList(_catsBeanLiveData);
         return catsBeanLiveData;
     }
 
