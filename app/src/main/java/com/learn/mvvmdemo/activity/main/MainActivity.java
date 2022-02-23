@@ -9,20 +9,23 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.learn.base.di.component.BaseComponent;
-import com.learn.base.di.component.DaggerBaseComponent;
+import com.learn.base.response.Status;
 import com.learn.base.utils.InjectUtils;
 import com.learn.catdetail.CatDetailActivity;
 import com.learn.mvvmdemo.R;
+import com.learn.mvvmdemo.activity.main.adapter.CatsListAdapter;
 import com.learn.mvvmdemo.activity.main.viewmodel.CatsListViewModel;
 import com.learn.mvvmdemo.di.componet.DaggerMainComponent;
 
 public class MainActivity extends AppCompatActivity {
+    private final String TAG = "MainActivity";
     private ProgressBar progressBar;
     private RecyclerView catsListRecyclerView;
     private CatsListViewModel catsListViewModel;
+    private CatsListAdapter catsListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +35,28 @@ public class MainActivity extends AppCompatActivity {
 
         initView();
         setClickListener();
-
+        initObserve();
 
         getCatList();
+    }
+
+    private void initObserve() {
+        catsListAdapter = new CatsListAdapter(this);
+        catsListRecyclerView.setAdapter(catsListAdapter);
+        catsListViewModel.catsBeanLiveData.observe(this, listCatResponse -> {
+            if (listCatResponse.getStatus() == Status.LOADING) {
+                Log.d(TAG, "main Loading");
+               showLoading(true);
+            } else if (listCatResponse.getStatus() == Status.ERROR){
+                Log.d(TAG, "main error");
+                Toast.makeText(this, listCatResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                showLoading(false);
+            } else {
+                Log.d(TAG, "main success");
+                catsListAdapter.addAllCatsList(listCatResponse.getData());
+                showLoading(false);
+            }
+        });
     }
 
     private void initView() {
@@ -47,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void setClickListener() {
         progressBar.setOnClickListener(v -> jumpCatDetail());
+    }
+
+    private void showLoading(boolean loading) {
+        if (loading) {
+            this.progressBar.setVisibility(View.VISIBLE);
+        } else {
+            this.progressBar.setVisibility(View.GONE);
+        }
     }
 
     private void initDaggerAndInject() {
@@ -63,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void jumpCatDetail() {
-        Log.d("dd", "asdf");
         ARouter.getInstance()
                 .build(CatDetailActivity.PATH)
                 .navigation();

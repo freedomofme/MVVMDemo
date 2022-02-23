@@ -1,6 +1,6 @@
 package com.learn.mvvmdemo.api;
 
-import com.learn.mvvmdemo.bean.CatsBean;
+import com.learn.mvvmdemo.bean.CatBean;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 public interface CatsListService {
 
     @GET("v1/breeds")
-    Call<List<CatsBean>> getCatsList(
+    Call<List<CatBean>> getCatsList(
             @Query("page") int query,
             @Query("limit") int limit
     );

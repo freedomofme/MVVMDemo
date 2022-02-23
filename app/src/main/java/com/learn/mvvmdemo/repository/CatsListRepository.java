@@ -5,9 +5,10 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.learn.base.response.CatResponse;
 import com.learn.base.service.DatabaseService;
 import com.learn.mvvmdemo.api.CatsListService;
-import com.learn.mvvmdemo.bean.CatsBean;
+import com.learn.mvvmdemo.bean.CatBean;
 
 import java.util.List;
 
@@ -27,18 +28,23 @@ public class CatsListRepository {
         this.databaseService = databaseService;
     }
 
-    public void getCatsList(MutableLiveData<List<CatsBean>> catsBeanLiveData) {
-        catsListService.getCatsList(0, 10).enqueue(new Callback<List<CatsBean>>() {
+    public void getCatsList(MutableLiveData<CatResponse<List<CatBean>>> catsBeanLiveData, int start, int limit) {
+        catsListService.getCatsList(start, limit).enqueue(new Callback<List<CatBean>>() {
 
             @Override
-            public void onResponse(@NonNull Call<List<CatsBean>> call, @NonNull Response<List<CatsBean>> response) {
-                catsBeanLiveData.setValue(response.body());
+            public void onResponse(@NonNull Call<List<CatBean>> call, @NonNull Response<List<CatBean>> response) {
+                if (response.isSuccessful()) {
+                    catsBeanLiveData.setValue(CatResponse.success(response.body()));
+                } else {
+                    catsBeanLiveData.setValue(CatResponse.error(response));
+                }
+
                 Log.d("dd", response.body().toString());
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<CatsBean>> call, @NonNull Throwable t) {
-
+            public void onFailure(@NonNull Call<List<CatBean>> call, @NonNull Throwable t) {
+                catsBeanLiveData.setValue(CatResponse.error(t));
             }
         });
     }

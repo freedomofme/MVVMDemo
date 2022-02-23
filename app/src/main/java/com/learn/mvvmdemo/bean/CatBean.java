@@ -2,7 +2,7 @@ package com.learn.mvvmdemo.bean;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CatsBean {
+public class CatBean {
     @SerializedName("id")
     String id;
 
@@ -11,6 +11,19 @@ public class CatsBean {
 
     @SerializedName("name")
     String name;
+
+    @SerializedName("origin")
+    String origin;
+
+    @Override
+    public String toString() {
+        return "CatBean{" +
+                "id='" + id + '\'' +
+                ", catImage=" + catImage +
+                ", name='" + name + '\'' +
+                ", origin='" + origin + '\'' +
+                '}';
+    }
 
     public String getId() {
         return id;
@@ -36,12 +49,11 @@ public class CatsBean {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "CatsBean{" +
-                "id='" + id + '\'' +
-                ", catImage=" + catImage +
-                ", name='" + name + '\'' +
-                '}';
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 }
