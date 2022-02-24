@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/imgViewCover"
-        android:layout_width="100dp"
-        android:layout_height="140dp"
+        android:layout_width="173dp"
+        android:layout_height="240dp"
         android:layout_marginBottom="5dp"
         android:scaleType="centerCrop" />
 

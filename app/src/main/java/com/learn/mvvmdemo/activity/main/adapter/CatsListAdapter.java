@@ -11,12 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
+import com.learn.catdetail.CatDetailActivity;
 import com.learn.mvvmdemo.R;
-import com.learn.mvvmdemo.bean.CatBean;
+import com.learn.base.bean.CatBean;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.learn.base.Constant.CAT_DETAIL_ACTIVITY_URL_KEY;
 
 public class CatsListAdapter extends RecyclerView.Adapter<CatsListAdapter.ViewHolder> {
     private final String TAG = "CatsListAdapter";
@@ -40,12 +44,23 @@ public class CatsListAdapter extends RecyclerView.Adapter<CatsListAdapter.ViewHo
         CatBean catBean = catBeans.get(position);
         viewHolder.tvTitle.setText(catBean.getName());
         viewHolder.tvOrigin.setText(catBean.getOrigin());
-        Log.d(TAG, "cat list item bind image url:" + catBean.getCatImage());
         if (catBean.getCatImage() != null) {
+            String url = catBean.getCatImage().getUrl();
+            Log.d(TAG, "cat list item bind image url:" + url);
+
             Glide.with(context)
-                    .load(catBean.getCatImage().getUrl())
+                    .load(url)
+                    .override(260, 320)
+                    .fitCenter()
                     .into(viewHolder.imgViewCover);
+
+            viewHolder.imgViewCover.setOnClickListener(v ->
+                    ARouter.getInstance()
+                            .build(CatDetailActivity.PATH)
+                            .withString(CAT_DETAIL_ACTIVITY_URL_KEY, url)
+                            .navigation());
         }
+
     }
 
     @Override
@@ -54,12 +69,12 @@ public class CatsListAdapter extends RecyclerView.Adapter<CatsListAdapter.ViewHo
     }
 
     public void addAllCatsList(List<CatBean> catsList) {
+        this.catBeans.clear();
         this.catBeans.addAll(catsList);
         notifyDataSetChanged();
     }
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView imgViewCover;
         private final TextView tvTitle;
         private final TextView tvOrigin;

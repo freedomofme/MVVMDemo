@@ -1,17 +1,12 @@
 package com.learn.base.di.module;
 
 import com.learn.base.Config;
-import com.learn.base.service.DatabaseService;
 import com.learn.base.service.NetworkService;
-
-import java.io.IOException;
 
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -21,13 +16,7 @@ import javax.inject.Singleton;
 import static com.learn.base.Config.BASE_URL;
 
 @Module
-public class BaseModule {
-
-    @Provides
-    @Singleton
-    DatabaseService provideDatabaseService() {
-        return new DatabaseService();
-    }
+public class NetworkModule {
 
     @Provides
     @Singleton

@@ -1,12 +1,21 @@
-package com.learn.mvvmdemo.bean;
+package com.learn.base.bean;
+
+import androidx.annotation.NonNull;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
+@Entity
 public class CatBean {
+    @PrimaryKey
     @SerializedName("id")
+    @NonNull
     String id;
 
     @SerializedName("image")
+    @Embedded
     CatImage catImage;
 
     @SerializedName("name")

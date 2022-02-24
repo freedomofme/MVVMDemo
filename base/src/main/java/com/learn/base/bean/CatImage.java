@@ -1,4 +1,6 @@
-package com.learn.mvvmdemo.bean;
+package com.learn.base.bean;
+
+import androidx.room.ColumnInfo;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -10,6 +12,7 @@ public class CatImage {
     double width;
 
     @SerializedName("id")
+    @ColumnInfo(name="imageId")
     String id;
 
     @SerializedName("url")

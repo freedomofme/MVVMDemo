@@ -1,6 +1,6 @@
 package com.learn.mvvmdemo.api;
 
-import com.learn.mvvmdemo.bean.CatBean;
+import com.learn.base.bean.CatBean;
 
 import java.util.List;
 

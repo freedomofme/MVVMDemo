@@ -1,11 +1,14 @@
 package com.learn.mvvmdemo.activity.main.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.learn.base.response.CatResponse;
-import com.learn.mvvmdemo.bean.CatBean;
+import com.learn.base.bean.CatBean;
 import com.learn.mvvmdemo.repository.CatsListRepository;
 
 import java.util.List;
@@ -20,11 +23,11 @@ public class CatsListViewModel extends ViewModel {
     int startIndex = 0;
     int pageLimit = 20;
 
-    private MutableLiveData<CatResponse<List<CatBean>>> _catsBeanLiveData;
+    private MediatorLiveData<CatResponse<List<CatBean>>> _catsBeanLiveData;
     public LiveData<CatResponse<List<CatBean>>> catsBeanLiveData;
 
     public CatsListViewModel() {
-        _catsBeanLiveData = new MutableLiveData<>();
+        _catsBeanLiveData = new MediatorLiveData<>();
         catsBeanLiveData = _catsBeanLiveData;
     }
 

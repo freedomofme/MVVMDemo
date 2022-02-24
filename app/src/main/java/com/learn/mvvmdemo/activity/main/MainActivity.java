@@ -40,19 +40,22 @@ public class MainActivity extends AppCompatActivity {
         getCatList();
     }
 
+    private void setClickListener() {
+    }
+
     private void initObserve() {
         catsListAdapter = new CatsListAdapter(this);
         catsListRecyclerView.setAdapter(catsListAdapter);
         catsListViewModel.catsBeanLiveData.observe(this, listCatResponse -> {
             if (listCatResponse.getStatus() == Status.LOADING) {
-                Log.d(TAG, "main Loading");
+                Log.d(TAG, "cats Loading");
                showLoading(true);
             } else if (listCatResponse.getStatus() == Status.ERROR){
-                Log.d(TAG, "main error");
+                Log.d(TAG, "cats error");
                 Toast.makeText(this, listCatResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 showLoading(false);
             } else {
-                Log.d(TAG, "main success");
+                Log.d(TAG, "cats success");
                 catsListAdapter.addAllCatsList(listCatResponse.getData());
                 showLoading(false);
             }
@@ -65,10 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
         catsListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         catsListRecyclerView.setHasFixedSize(true);
-    }
-
-    private void setClickListener() {
-        progressBar.setOnClickListener(v -> jumpCatDetail());
     }
 
     private void showLoading(boolean loading) {
@@ -91,14 +90,5 @@ public class MainActivity extends AppCompatActivity {
     private void getCatList() {
         catsListViewModel.getCats();
     }
-
-    private void jumpCatDetail() {
-        ARouter.getInstance()
-                .build(CatDetailActivity.PATH)
-                .navigation();
-    }
-
-
-
 
 }

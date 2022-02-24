@@ -6,7 +6,9 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.learn.base.di.BaseComponentProvider;
 import com.learn.base.di.component.BaseComponent;
 import com.learn.base.di.component.DaggerBaseComponent;
-import com.learn.base.di.module.BaseModule;
+import com.learn.base.di.module.AppModule;
+import com.learn.base.di.module.DatabaseModule;
+import com.learn.base.di.module.NetworkModule;
 
 public class MyApplication extends Application implements BaseComponentProvider {
     BaseComponent baseComponent;
@@ -30,7 +32,10 @@ public class MyApplication extends Application implements BaseComponentProvider 
     }
 
     void initBaseComponent() {
-        baseComponent = DaggerBaseComponent.builder().baseModule(new BaseModule()).build();
+        baseComponent = DaggerBaseComponent.builder()
+                .appModule(new AppModule(this))
+                .databaseModule(new DatabaseModule())
+                .networkModule(new NetworkModule()).build();
         baseComponent.inject(this);
     }
 
