@@ -30,4 +30,13 @@ ext {
     arouterCompilerVersion = '1.2.2'
     room_version = '2.2.1'
     glide_version = '4.13.0'
+    retrofit_version = '2.5.0'
+    constraintlayout_version = '2.1.3'
+    recyclerview_version = '1.2.1'
+    dagger_version = '2.27'
+    gson_version = '2.8.6'
+    logging_interceptor_version = '3.4.1'
+    junit_version = '4.+'
+    ext_junit_version = '1.1.3'
+    espresso_version = '3.4.0'
 }

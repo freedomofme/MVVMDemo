@@ -54,7 +54,7 @@ public class CatsListAdapter extends RecyclerView.Adapter<CatsListAdapter.ViewHo
                     .fitCenter()
                     .into(viewHolder.imgViewCover);
 
-            viewHolder.imgViewCover.setOnClickListener(v ->
+            viewHolder.itemView.setOnClickListener(v ->
                     ARouter.getInstance()
                             .build(CatDetailActivity.PATH)
                             .withString(CAT_DETAIL_ACTIVITY_URL_KEY, url)
@@ -78,10 +78,12 @@ public class CatsListAdapter extends RecyclerView.Adapter<CatsListAdapter.ViewHo
         private final ImageView imgViewCover;
         private final TextView tvTitle;
         private final TextView tvOrigin;
+        private final View itemView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            this.itemView = itemView;
             imgViewCover = (ImageView) itemView.findViewById(R.id.imgViewCover);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
             tvOrigin = (TextView) itemView.findViewById(R.id.tvOrigin);

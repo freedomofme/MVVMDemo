@@ -7,6 +7,17 @@
     tools:context=".CatDetailActivity">
 
     <ImageView
+        android:id="@+id/iv_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="@dimen/cat_normal_margin"
+        android:layout_marginTop="@dimen/cat_normal_margin"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@mipmap/ic_back"
+        />
+
+    <ImageView
         android:id="@+id/iv_cat_full_screen"
         android:layout_width="0dp"
         android:layout_height="0dp"
