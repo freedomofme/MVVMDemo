@@ -1,19 +1,22 @@
 # MVVMDemo--Cat Image Gallery
 
+## Quick Start
+You may modify the config of sdk.dir in local.properties
+
 ## Architecture
 * MVVM (LiveData & View Model & Rep)
 * Dagger (for DI)
 * Arouter (page jump, suitable for multi-module)
 * Componentization
 
-## function of each module
+## Function of each module
 
 * base module provides standard functions, such as network requests, database read and write
 * app module should be just a container (but for now contains some feature); 
 * catdetail module shows the big image of cats.
 
 ### Compile independent
-modify the variable isModule in gradle.properties file.
+Modify the variable isModule in gradle.properties file.
 isModule = true means each business module can run independently except app module.
 isModule = false means only the app module can run.
 
