@@ -10,7 +10,6 @@
 /build
 /captures
 .cxx
-/gradle
 
 # Built application files
 *.aar
